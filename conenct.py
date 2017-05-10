@@ -11,7 +11,3 @@ def connect_to_db():
     except Exception as e:
         print("Uh oh, can't connect. Invalid dbname, user or password?")
         print(e)
-
-
-if __name__ == '__main__':
-    connect_to_db()
