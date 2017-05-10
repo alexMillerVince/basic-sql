@@ -1,12 +1,15 @@
 from conenct import *
 
 
-def get_name_of_mentors():
+def list_name_of_mentors():
     """
     returns the 2 name columns of the mentors table.
     :return: first_name, last_name
     """
-    pass
+    cursor = connect_to_db()
+    cursor.execute("""SELECT first_name, last_name FROM mentors""")
+    rows = cursor.fetchall()
+    return rows
 
 
 def get_mentor_by_city(city):
