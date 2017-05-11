@@ -7,7 +7,7 @@ def list_name_of_mentors():
     :return: first_name, last_name
     """
     cursor = connect_to_db()
-    cursor.execute("""SELECT first_name, last_name FROM mentors""")
+    cursor.execute("""SELECT first_name, last_name FROM mentors ORDER BY first_name ASC;""")
     rows = cursor.fetchall()
     return rows
 

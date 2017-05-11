@@ -1,11 +1,7 @@
-import gui
-import dbqueries
+import ui
+from dbqueries import *
 
-
-def main():
-    gui.create_button('List Mentors',row=1, width=10)
-    gui.root.mainloop()
-
-
-if __name__ == '__main__':
-    main()
+def list_mentors():
+    head = ['First Name', 'Last Name']
+    table = list_name_of_mentors()
+    ui.print_table(table, head)
