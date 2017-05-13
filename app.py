@@ -24,3 +24,13 @@ def get_info():
     for item in table:
         info_list = [[item[0] + ' ' + item[1], item[2]]]
     ui.print_table(info_list, head)
+
+
+def get_info_by_university():
+    inputs = ui.get_inputs(['Please specify the University: '])
+    university = inputs[0]
+    head = ['Full Name', 'Phone Number']
+    table = get_applicant_info_by_university(university)
+    for item in table:
+        info_list = [[item[0] + ' ' + item[1], item[2]]]
+    ui.print_table(info_list, head)
