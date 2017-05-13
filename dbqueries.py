@@ -15,16 +15,36 @@ def list_name_of_mentors():
 def get_mentor_by_city(city):
     """
     returns the nick_name-s of all mentors working at a specific city.
-    :param city: city name
+    :param city: name of city
     :return: nick_name
     """
-    pass
+    cursor = connect_to_db()
+    cursor.execute("""SELECT nick_name FROM mentors WHERE city = '{}';""".format(str.capitalize(city)))
+    rows = cursor.fetchall()
+    return rows
 
 
-def get_full_name(first_name):
+def get_applicant_info(first_name):
     """
     returns the full_name-s and phone_number-s of an applicant by their first_name
-    :param first_name: the first name of an applicant
+    :param first_name: first name of an applicant
     :return: full_name, phone_number
     """
-    pass
+    cursor = connect_to_db()
+    cursor.execute("""SELECT first_name, last_name, phone_number
+    FROM applicants WHERE first_name = '{}';""".format(first_name))
+    rows = cursor.fetchall()
+    return rows
+
+
+def get_applicant_info_by_university(university):
+    """
+    returns the full_name-s and phone_number-s of an applicant by their university.
+    :param university: name of university
+    :return: full_name, phone_number
+    """
+    cursor = connect_to_db()
+    cursor.execute("""SELECT first_name, last_name, phone_number
+    FROM applicants WHERE email LIKE '%{}%';""".format(str.lower(university)))
+    rows = cursor.fetchall()
+    return rows
