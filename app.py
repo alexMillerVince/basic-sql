@@ -8,11 +8,11 @@ def list_mentors():
     ui.print_table(table, head)
 
 
-def list_mentor_by_city():
+def get_nickname_by_city():
     inputs = ui.get_inputs(['Please specify the city: '])
     city_name = inputs[0]
     head = ['Nick Name']
-    table = get_mentor_by_city(city_name)
+    table = get_mentors_by_city(city_name)
     ui.print_table(table, head)
 
 
@@ -26,11 +26,11 @@ def get_info():
     ui.print_table(info_list, head)
 
 
-def get_info_by_university():
+def get_info_by_email():
     inputs = ui.get_inputs(['Please specify the University: '])
-    university = inputs[0]
+    email = inputs[0]
     head = ['Full Name', 'Phone Number']
-    table = get_applicant_info_by_university(university)
+    table = get_applicant_info_by_email(email)
     for item in table:
         info_list = [[item[0] + ' ' + item[1], item[2]]]
     ui.print_table(info_list, head)

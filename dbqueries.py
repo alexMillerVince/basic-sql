@@ -1,4 +1,4 @@
-from conenct import *
+from connenct import *
 
 
 def list_name_of_mentors():
@@ -12,7 +12,7 @@ def list_name_of_mentors():
     return rows
 
 
-def get_mentor_by_city(city):
+def get_mentors_by_city(city):
     """
     returns the nick_name-s of all mentors working at a specific city.
     :param city: name of city
@@ -37,14 +37,14 @@ def get_applicant_info(first_name):
     return rows
 
 
-def get_applicant_info_by_university(university):
+def get_applicant_info_by_email(email):
     """
     returns the full_name-s and phone_number-s of an applicant by their university.
-    :param university: name of university
+    :param email: name of university
     :return: full_name, phone_number
     """
     cursor = connect_to_db()
     cursor.execute("""SELECT first_name, last_name, phone_number
-    FROM applicants WHERE email LIKE '%{}%';""".format(str.lower(university)))
+    FROM applicants WHERE email LIKE '%{}%';""".format(str.lower(email)))
     rows = cursor.fetchall()
     return rows
