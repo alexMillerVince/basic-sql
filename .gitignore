@@ -145,3 +145,5 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# Sense file
+credentials.py
