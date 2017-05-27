@@ -1,6 +1,6 @@
 import ui
 from random import randint
-from dbqueries import *
+from bll import *
 
 
 def generate_applicant_code():
