@@ -49,7 +49,7 @@ def get_applicant_info_by_emai(cursor ,email):
     rows = cursor.fetchall()
     return rows
 
-
+@connect
 def add_new_applicant(cursor, applicant):
     """
     returns the whole row of the inserted applicant
@@ -64,6 +64,7 @@ def add_new_applicant(cursor, applicant):
     return rows
 
 
+@connect
 def update_applicant_phone_number(cursor, applicant_name, phone_number):
     """
     returns the phone_number of the current applicant
@@ -99,5 +100,46 @@ def get_custom_attributes(cursor, table, attributes=''):
     :return: give_attributes
     """
     cursor.execute("""SELECT {} FROM {};""".format(attributes, table))
+    rows = cursor.fetchall()
+    return rows
+
+
+@connect
+def get_mentors_and_school(cursor):
+    cursor.execute("""SELECT  concat(mentors.first_name, ' ', mentors.last_name), schools.name, schools.country \
+    FROM mentors INNER JOIN schools ON mentors.city = schools.city ORDER BY mentors.id ASC;""")
+    rows = cursor.fetchall()
+    return rows
+
+
+@connect
+def get_mentors_and_all_school(cursor):
+    cursor.execute("""SELECT  concat(mentors.first_name, ' ', mentors.last_name), schools.name, schools.country \
+    FROM mentors RIGHT JOIN schools ON mentors.city = schools.city ORDER BY mentors.id ASC;""")
+    rows = cursor.fetchall()
+    return rows
+
+
+@connect
+def mentors_by_country(cursor):
+    cursor.execute("""SELECT schools.country, count(mentors.city) AS count \
+     FROM schools INNER JOIN mentors ON schools.city = mentors.city GROUP BY country ORDER BY schools.country;""")
+    rows = cursor.fetchall()
+    return rows
+
+
+@connect
+def get_contact_mentors(cursor):
+    cursor.execute("""SELECT schools.name, concat(mentors.first_name, ' ', mentors.last_name) \
+    FROM schools INNER JOIN mentors ON schools.contact_person = mentors.id ORDER BY schools.name ASC;""")
+    rows = cursor.fetchall()
+    return rows
+
+
+@connect
+def get_applicants(cursor):
+    cursor.execute("""SELECT applicants.first_name, applicants.application_code, applicants_mentors.creation_date \
+    FROM applicants INNER JOIN applicants_mentors ON applicants_mentors.applicant_id = applicants.id \
+     WHERE applicants_mentors.creation_date > '2016-01-01' ORDER BY creation_date DESC""")
     rows = cursor.fetchall()
     return rows
