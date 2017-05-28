@@ -25,8 +25,8 @@ def all_school():
 
 
 @app.route('/mentors-by-country')
-def mentors_by_countryl():
-    head_title = 'Mentors by country'
+def mentors_by_country():
+    head_title = 'Mentors by Country'
     head = ['Country', 'Number Of The Mentors']
     data = bll.mentors_by_country()
     return render_template('list.html', head=head, data=data, head_title=head_title)
@@ -42,9 +42,17 @@ def contacts():
 
 @app.route('/applicants')
 def applicants():
-    head_title = 'Mentors by country'
+    head_title = 'Applicants'
     head = ['First Name', 'Application Code', 'Creation Date']
     data = bll.get_applicants()
+    return render_template('list.html', head=head, data=data, head_title=head_title)
+
+
+@app.route('/applicants-and-mentors')
+def applicants_and_mentors():
+    head_title = 'Applicants and Mentors'
+    head = ['First Name', 'Application Code', 'Assigned Mentor']
+    data = bll.get_applicants_and_mentors()
     return render_template('list.html', head=head, data=data, head_title=head_title)
 
 
