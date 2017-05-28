@@ -140,6 +140,16 @@ def get_contact_mentors(cursor):
 def get_applicants(cursor):
     cursor.execute("""SELECT applicants.first_name, applicants.application_code, applicants_mentors.creation_date \
     FROM applicants INNER JOIN applicants_mentors ON applicants_mentors.applicant_id = applicants.id \
-     WHERE applicants_mentors.creation_date > '2016-01-01' ORDER BY creation_date DESC""")
+     WHERE applicants_mentors.creation_date > '2016-01-01' ORDER BY creation_date DESC;""")
+    rows = cursor.fetchall()
+    return rows
+
+
+@connect
+def get_applicants_and_mentors(cursor):
+    cursor.execute("""SELECT applicants.first_name, applicants.application_code, \
+     concat(mentors.first_name,  ' ', mentors.last_name) FROM applicants \
+      LEFT JOIN applicants_mentors ON applicants_mentors.applicant_id = applicants.id \
+      LEFT JOIN mentors ON applicants_mentors.mentor_id = mentors.id ORDER BY applicants.id ASC;""")
     rows = cursor.fetchall()
     return rows
